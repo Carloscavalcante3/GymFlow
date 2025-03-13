@@ -5,9 +5,7 @@ Projeto para a disciplina de Programação Orientada a Objetos.
 Explique o que o projeto faz e por que ele foi criado. Inclua os principais objetivos e desafios resolvidos.  
 
 ## 📋 Funcionalidades Principais  
-- ✅ [Preencha aqui]  
-- ✅ [Preencha aqui]  
-- ✅ [Preencha aqui]  
+- ✅
 
 ## 💻 Tecnologias Utilizadas  
 Liste as principais tecnologias usadas no projeto:  
@@ -19,8 +17,8 @@ Liste as principais tecnologias usadas no projeto:
 
 ## 👥 Equipe  
 
-| Nome  | GitHub | Função |
-|-------|--------|--------|
+| Nome  | GitHub |
+|-------|--------|
 | Carlos Cavalcante | [@usuario1](https://github.com/usuario1) |
 | Lilian Beckman | [@usuario2](https://github.com/usuario2) |
 | Luiz Henrique Cavalcanti | [@usuario3](https://github.com/usuario3) |
