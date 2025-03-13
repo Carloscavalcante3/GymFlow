@@ -19,7 +19,7 @@ Liste as principais tecnologias usadas no projeto:
 
 | Nome  | GitHub |
 |-------|--------|
-| Carlos Cavalcante | [@usuario1](https://github.com/Carloscavalcante3) |
+| Carlos Cavalcante | [@Carloscavalcante3](https://github.com/Carloscavalcante3) |
 | Lilian Beckman | [@usuario2](https://github.com/usuario2) |
 | Luiz Henrique Cavalcanti | [@usuario3](https://github.com/usuario3) |
 | Maria Eduarda Pernambuco | [@usuario3](https://github.com/usuario3) |
