@@ -21,7 +21,7 @@ Liste as principais tecnologias usadas no projeto:
 |-------|--------|
 | Carlos Cavalcante | [@Carloscavalcante3](https://github.com/Carloscavalcante3) |
 | Lilian Beckman | [@lilibeckman](https://github.com/lilibeckman) |
-| Luiz Henrique Cavalcanti | [@usuario3](https://github.com/usuario3) |
+| Luiz Henrique Cavalcanti | [@lhickk17](https://github.com/lhickk17) |
 | Maria Eduarda Pernambuco | [@mariaeduardapernambuco](https://github.com/mariaeduardapernambuco) |
 | Nathalia Carvalho Pascoal | [@nathaliacarvalhop](https://github.com/nathaliacarvalhop) |
 
