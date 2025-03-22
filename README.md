@@ -32,6 +32,7 @@ Principais tecnologias usadas no projeto:
 ## ✅Entrega 01
 
 - **Documento com as Histórias de Usuário:** https://docs.google.com/document/d/1u3GG0e-c5OxYSmTZAFWQ3sMPrNkkLIwrIP47DaMoQOg/edit?usp=sharing
-- **Screencast:** 
+- **Protótipo (Figma):** https://www.figma.com/design/NwpaeAqG1X4QwVcFXkw4J3/GymFlow?node-id=0-1&t=4CW1bTAoMpqrbUxP-1
+![Image](https://github.com/user-attachments/assets/c75ea360-03d6-43c5-aa85-68e7987aa2e6)
 
 
