@@ -1,4 +1,4 @@
-# Projeto_POO
+# GymFlow
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Carloscavalcante3/Projeto_POO?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/Carloscavalcante3/Projeto_POO?style=for-the-badge)
