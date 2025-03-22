@@ -31,7 +31,7 @@ Liste as principais tecnologias usadas no projeto:
 
 ## ✅Entrega 01
 
-- **Documento com as Histórias de Usuário:**
-- **Screencast:**
+- **Documento com as Histórias de Usuário:** https://docs.google.com/document/d/1u3GG0e-c5OxYSmTZAFWQ3sMPrNkkLIwrIP47DaMoQOg/edit?usp=sharing
+- **Screencast:** 
 
 
