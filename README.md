@@ -14,7 +14,7 @@
 ## 💻 Tecnologias Utilizadas  
 Liste as principais tecnologias usadas no projeto:  
 
-- **Linguagens:** 
+- **Linguagens:** Java
 - **Frameworks:** 
 - **Banco de Dados:** 
 - **Outros:**  
