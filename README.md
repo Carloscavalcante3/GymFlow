@@ -11,9 +11,6 @@
 
 > Projeto para a disciplina de Programação Orientada a Objetos
 
-## 📋 Funcionalidades Principais  
-- ✅
-
 ## 💻 Tecnologias Utilizadas  
 Liste as principais tecnologias usadas no projeto:  
 
@@ -31,5 +28,10 @@ Liste as principais tecnologias usadas no projeto:
 | Luiz Henrique Cavalcanti | [@lhickk17](https://github.com/lhickk17) |
 | Maria Eduarda Pernambuco | [@mariaeduardapernambuco](https://github.com/mariaeduardapernambuco) |
 | Nathalia Carvalho Pascoal | [@nathaliacarvalhop](https://github.com/nathaliacarvalhop) |
+
+## ✅Entrega 01
+
+- **Documento com as Histórias de Usuário:**
+- **Screencast:**
 
 
