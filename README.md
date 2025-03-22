@@ -12,7 +12,7 @@
 > Projeto para a disciplina de Programação Orientada a Objetos
 
 ## 💻 Tecnologias Utilizadas  
-Liste as principais tecnologias usadas no projeto:  
+Principais tecnologias usadas no projeto:  
 
 - **Linguagens:** Java
 - **Frameworks:** 
