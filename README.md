@@ -15,7 +15,7 @@
 Principais tecnologias usadas no projeto:  
 
 - **Linguagens:** Java
-- **Frameworks:** 
+- **Frameworks:** JavaFX
 - **Banco de Dados:** 
 - **Outros:**  
 
