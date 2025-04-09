@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8d8675c-66e0-4ebc-9f7b-5ecefbbf5333" name="Changes" comment="" />
+    <list default="true" id="b8d8675c-66e0-4ebc-9f7b-5ecefbbf5333" name="Changes" comment="chore: Organizando a documentação do código" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,6 +62,19 @@
       <option name="presentableId" value="Default" />
       <updated>1744221875881</updated>
     </task>
+    <task id="LOCAL-00001" summary="chore: Organizando a documentação do código">
+      <option name="closed" value="true" />
+      <created>1744223439238</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744223439238</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: Organizando a documentação do código" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: Organizando a documentação do código" />
   </component>
 </project>
