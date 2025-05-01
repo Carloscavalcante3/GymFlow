@@ -13,15 +13,8 @@ public class Aluno {
         this.altura = altura;
     }
 
-    public String getNome() { return nome; }
-    public int getIdade() { return idade; }
-    public double getPeso() { return peso; }
-    public double getAltura() { return altura; }
-
-    public void exibirDados() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + idade);
-        System.out.println("Peso: " + peso + " kg");
-        System.out.println("Altura: " + altura + " m");
+    @Override
+    public String toString() {
+        return nome + " - " + idade + " anos";
     }
 }
