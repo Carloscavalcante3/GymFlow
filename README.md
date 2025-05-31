@@ -7,8 +7,6 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Carloscavalcante3/Projeto_POO?style=for-the-badge)
 
 
-![Image](https://github.com/user-attachments/assets/d5b160a9-67b0-477b-a38b-3f8022608e81)
-
 > Projeto para a disciplina de Programação Orientada a Objetos
 
 ## 💻 Tecnologias Utilizadas
