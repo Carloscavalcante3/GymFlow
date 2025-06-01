@@ -31,10 +31,10 @@ Principais tecnologias usadas no projeto:
 
 ## ✅Entregas
 
-- **Documento com as Histórias de Usuário:** https://docs.google.com/document/d/1u3GG0e-c5OxYSmTZAFWQ3sMPrNkkLIwrIP47DaMoQOg/edit?usp=sharing
+- **Histórias implementadas:** Foram adicionadas as histórias 5, 6 e 7 nessa versão(https://docs.google.com/document/d/1u3GG0e-c5OxYSmTZAFWQ3sMPrNkkLIwrIP47DaMoQOg/edit?usp=sharing)
 - **Protótipo (Figma):** https://www.figma.com/design/NwpaeAqG1X4QwVcFXkw4J3/GymFlow?node-id=0-1&t=4CW1bTAoMpqrbUxP-1
 - **Diagrama de classes:** https://drive.google.com/file/d/13Dh4NR5zpxFKtyXd3Lxre3L8Co2FbN6u/view?usp=sharing
-- **Screencast do sistema:** https://github.com/user-attachments/assets/6cb8c6d1-353f-4fe6-be1d-8e249b5e69b5
+- **Screencast do sistema:** https://github.com/user-attachments/assets/5cd00df7-70ab-48b3-887f-e502cef90c4c
 - **Screencast dos testes automatizados:** https://github.com/user-attachments/assets/40ae99e6-0c4f-408d-bf36-f6a582e78a52
 
 
@@ -45,7 +45,9 @@ Principais tecnologias usadas no projeto:
 - IDE compatível com java
 
 ### Passo 1: Clonar repositório
-- No terminal: git clone https://github.com/Carloscavalcante3/GymFlow/
+- Abra a IDE de sua preferência (Se possível Eclipe ou InteliJ IDEA)
+- No terminal digite: git clone https://github.com/Carloscavalcante3/GymFlow/
+- Aguarde o projeto ser clonado
 
 ### Passo 2: Rodar o projeto
 - Com tudo instalado execute a aplicação pela class principal Main.java
