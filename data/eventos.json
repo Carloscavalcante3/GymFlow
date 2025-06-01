@@ -1,0 +1,51 @@
+{
+  "eventos": [
+    {
+      "tipo": "treino",
+      "nomeAluno": "Exemplo Aluno",
+      "grupoAluno": "Iniciante",
+      "data": "2024-03-19T10:00:00",
+      "duracao": 60,
+      "treino": {
+        "nome": "Treino A - Superior",
+        "exercicios": [
+          {
+            "nome": "Supino Reto",
+            "series": 3,
+            "repeticoes": 12
+          },
+          {
+            "nome": "Puxada Alta",
+            "series": 3,
+            "repeticoes": 12
+          }
+        ],
+        "concluido": false,
+        "pontuacao": 46
+      },
+      "observacoes": "Primeira sessão do novo programa de treino"
+    },
+    {
+      "tipo": "Treino",
+      "nomeAluno": "Aluno Demo",
+      "grupoAluno": "Iniciante",
+      "data": "2025-06-01T06:00:00",
+      "duracao": 60,
+      "treino": {
+        "nome": "",
+        "exercicios": [],
+        "concluido": false,
+        "pontuacao": 0
+      },
+      "observacoes": ""
+    },
+    {
+      "tipo": "Corrida",
+      "nomeAluno": "Aluno Demo",
+      "grupoAluno": "Iniciante",
+      "data": "2025-05-31T06:00:00",
+      "duracao": 60,
+      "observacoes": "corrida cesar"
+    }
+  ]
+}

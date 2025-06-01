@@ -1,167 +1,129 @@
 package src.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.io.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import src.Main;
+import src.model.Aluno;
+import src.model.Mensagem;
+import src.model.MensagemRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.lang.reflect.Type;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import java.util.List;
 
 public class ContatoInstrutorController {
-    @FXML
-    private TextField assuntoField;
-    
     @FXML
     private TextArea mensagemArea;
     
     @FXML
-    private Text mensagemFeedback;
+    private TextField assuntoField;
     
     @FXML
-    private ListView<String> historicoMensagens;
+    private ListView<String> historicoListView;
     
     @FXML
-    private Text nomeUsuarioText;
-    
-    @FXML
-    private Text pontosText;
+    private Text mensagemEnviadaText;
     
     private ObservableList<String> mensagens;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private Aluno alunoAtual;
+    
     @FXML
     public void initialize() {
-        String nomeUsuario = LoginController.getUsuarioLogado().getNome();
-        nomeUsuarioText.setText(nomeUsuario);
-        atualizarPontos();
-        
+        alunoAtual = LoginController.getUsuarioLogado();
         mensagens = FXCollections.observableArrayList();
-        historicoMensagens.setItems(mensagens);
+        historicoListView.setItems(mensagens);
         carregarHistoricoMensagens();
     }
-
-    private void atualizarPontos() {
-        if (pontosText != null) {
-            pontosText.setText(String.format("%d pts", LoginController.getUsuarioLogado().getPontos()));
-        }
-    }
-
+    
     private void carregarHistoricoMensagens() {
-        try {
-            File file = new File("data/mensagens.json");
-            if (!file.exists() || file.length() == 0) {
-                return;
-            }
+        if (alunoAtual != null) {
+            List<Mensagem> historicoMensagens = MensagemRepository.carregarMensagensDoAluno(alunoAtual.getNome());
+            mensagens.clear();
             
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                StringBuilder content = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content.append(line);
-                }
-                
-                // Remove colchetes e divide por vírgulas
-                String jsonContent = content.toString().replace("[", "").replace("]", "");
-                String[] mensagensJson = jsonContent.split("},");
-                
-                for (String mensagemJson : mensagensJson) {
-                    if (!mensagemJson.endsWith("}")) {
-                        mensagemJson += "}";
-                    }
-                    
-                    try {
-                        Map<String, String> mensagem = new Gson().fromJson(mensagemJson, new TypeToken<Map<String, String>>(){}.getType());
-                        if (mensagem != null) {
-                            LocalDateTime data = LocalDateTime.parse(mensagem.get("data"));
-                            String formatoMensagem = String.format("[%s] %s\nAssunto: %s\n%s\n",
-                                data.format(formatter),
-                                mensagem.get("aluno"),
-                                mensagem.get("assunto"),
-                                mensagem.get("mensagem"));
-                            mensagens.add(formatoMensagem);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Erro ao processar mensagem: " + mensagemJson);
-                    }
-                }
+            for (Mensagem msg : historicoMensagens) {
+                String formatoMensagem = String.format("[%s] %s\nAssunto: %s\n%s\n",
+                    msg.getData().format(formatter),
+                    msg.getAluno(),
+                    msg.getAssunto(),
+                    msg.getMensagem());
+                mensagens.add(formatoMensagem);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
-
+    
     @FXML
     private void enviarMensagem() {
+        if (alunoAtual == null) {
+            mensagemEnviadaText.setText("Erro: Usuário não está logado");
+            mensagemEnviadaText.setVisible(true);
+            return;
+        }
+        
         String assunto = assuntoField.getText().trim();
         String mensagem = mensagemArea.getText().trim();
         
         if (assunto.isEmpty() || mensagem.isEmpty()) {
-            mensagemFeedback.setText("Por favor, preencha todos os campos.");
-            mensagemFeedback.setStyle("-fx-fill: red;");
-            mensagemFeedback.setVisible(true);
+            mensagemEnviadaText.setText("Por favor, preencha todos os campos");
+            mensagemEnviadaText.setVisible(true);
             return;
         }
         
-        // Formata a mensagem com data e hora
-        LocalDateTime agora = LocalDateTime.now();
-        String dataHora = agora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        String mensagemFormatada = String.format("[%s] %s\n%s", dataHora, assunto, mensagem);
+        Mensagem novaMensagem = new Mensagem(
+            alunoAtual.getNome(),
+            assunto,
+            mensagem,
+            LocalDateTime.now(),
+            null // instrutor será definido quando a mensagem for respondida
+        );
         
-        // Adiciona ao histórico
-        mensagens.add(0, mensagemFormatada);
+        MensagemRepository.salvarMensagem(novaMensagem);
         
-        // Limpa os campos
+        // Limpar campos e mostrar confirmação
         assuntoField.clear();
         mensagemArea.clear();
+        mensagemEnviadaText.setText("Mensagem enviada com sucesso!");
+        mensagemEnviadaText.setVisible(true);
         
-        // Mostra feedback
-        mensagemFeedback.setText("Mensagem enviada com sucesso!");
-        mensagemFeedback.setStyle("-fx-fill: green;");
-        mensagemFeedback.setVisible(true);
-    }
-    
-    @FXML
-    private void navegarInicio() {
-        voltar();
-    }
-    
-    @FXML
-    private void voltar() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ListaTreinos.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) assuntoField.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Atualizar histórico
+        carregarHistoricoMensagens();
     }
     
     @FXML
     private void navegarCalendario() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Calendario.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/Calendario.fxml"));
             Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) assuntoField.getScene().getWindow();
+            scene.getStylesheets().add(Main.class.getResource("/style/style.css").toExternalForm());
+            Stage stage = (Stage) mensagemArea.getScene().getWindow();
             stage.setScene(scene);
             stage.setFullScreen(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    @FXML
+    private void navegarTreinos() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ListaTreinos.fxml"));
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(Main.class.getResource("/style/style.css").toExternalForm());
+            Stage stage = (Stage) mensagemArea.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void voltar() {
+        navegarTreinos();
     }
 } 

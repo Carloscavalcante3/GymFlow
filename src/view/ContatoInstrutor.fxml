@@ -17,11 +17,11 @@
             
             <VBox spacing="15" style="-fx-padding: 20 0;">
                 <Button text="🏠 Início" 
-                        onAction="#navegarInicio"
+                        onAction="#navegarTreinos"
                         styleClass="sidebar-button"/>
                                
                 <Button text="💪 Meus Treinos" 
-                        onAction="#voltar"
+                        onAction="#navegarTreinos"
                         styleClass="sidebar-button"/>
                                
                 <Button text="📅 Calendário" 
@@ -62,14 +62,14 @@
                             styleClass="button"/>
                 </HBox>
                 
-                <Text fx:id="mensagemFeedback" 
+                <Text fx:id="mensagemEnviadaText" 
                       style="-fx-fill: green;" 
                       visible="false"/>
                       
                 <Text text="Histórico de Mensagens"
                       styleClass="section-title"/>
                       
-                <ListView fx:id="historicoMensagens" VBox.vgrow="ALWAYS">
+                <ListView fx:id="historicoListView" VBox.vgrow="ALWAYS">
                     <placeholder>
                         <Label text="Nenhuma mensagem enviada" 
                                style="-fx-text-fill: #7f8c8d;"/>

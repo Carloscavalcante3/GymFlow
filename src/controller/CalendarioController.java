@@ -11,9 +11,15 @@ import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import src.Main;
+import src.model.Aluno;
+import src.model.Evento;
+import src.model.EventoRepository;
+import src.model.Treino;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 public class CalendarioController {
@@ -30,34 +36,16 @@ public class CalendarioController {
     private Text pontosText;
     
     private ObservableList<String> eventos;
+    private Aluno alunoAtual;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     
-    private static class Evento {
-        LocalDate data;
-        LocalTime hora;
-        String tipo;
-        String nome;
-        
-        public Evento(LocalDate data, LocalTime hora, String tipo, String nome) {
-            this.data = data;
-            this.hora = hora;
-            this.tipo = tipo;
-            this.nome = nome;
-        }
-        
-        @Override
-        public String toString() {
-            return String.format("%s %s - %s: %s", 
-                data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                hora.format(DateTimeFormatter.ofPattern("HH:mm")),
-                tipo, nome);
-        }
-    }
-
     @FXML
     public void initialize() {
-        String nomeUsuario = LoginController.getUsuarioLogado().getNome();
-        nomeUsuarioText.setText(nomeUsuario);
-        atualizarPontos();
+        alunoAtual = LoginController.getUsuarioLogado();
+        if (alunoAtual != null) {
+            nomeUsuarioText.setText(alunoAtual.getNome());
+            atualizarPontos();
+        }
         
         eventos = FXCollections.observableArrayList();
         listaEventos.setItems(eventos);
@@ -71,18 +59,34 @@ public class CalendarioController {
     
     private void atualizarPontos() {
         if (pontosText != null) {
-            pontosText.setText(String.format("%d pts", LoginController.getUsuarioLogado().getPontos()));
+            pontosText.setText(String.format("%d pts", alunoAtual.getPontos()));
         }
     }
     
     private void atualizarEventos(LocalDate data) {
         eventos.clear();
-        // Implementar carregamento de eventos do dia selecionado
+        if (alunoAtual != null) {
+            List<Evento> eventosDoAluno = EventoRepository.carregarEventosDoAluno(alunoAtual.getNome());
+            
+            for (Evento evento : eventosDoAluno) {
+                LocalDate dataEvento = evento.getData().toLocalDate();
+                if (dataEvento.equals(data)) {
+                    String descricao = String.format("%s %s - %s: %s",
+                        evento.getData().format(formatter),
+                        evento.getTipo(),
+                        evento.getTreino() != null ? evento.getTreino().getNome() : "",
+                        evento.getObservacoes());
+                    eventos.add(descricao);
+                }
+            }
+        }
     }
     
     @FXML
     private void adicionarEvento() {
-        Dialog<Evento> dialog = new Dialog<>();
+        if (alunoAtual == null) return;
+        
+        Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Novo Evento");
         dialog.setHeaderText("Adicionar Novo Evento");
         
@@ -93,13 +97,15 @@ public class CalendarioController {
         ComboBox<String> tipoCombo = new ComboBox<>();
         tipoCombo.getItems().addAll(
             "Treino",
-            "Consulta",
-            "Avaliação",
-            "Evento de comunidade",
-            "Corridas"
+            "Corrida",
+            "Evento de Comunidade",
+            "Avaliação"
         );
         tipoCombo.setValue("Treino");
         TextField nomeField = new TextField();
+        Spinner<Integer> duracaoSpinner = new Spinner<>(30, 180, 60);
+        TextArea observacoesArea = new TextArea();
+        observacoesArea.setPromptText("Observações (opcional)");
         
         // Layout
         VBox content = new VBox(10);
@@ -108,26 +114,47 @@ public class CalendarioController {
             new Label("Hora:"), 
             new HBox(5, horaSpinner, new Label(":"), minutoSpinner),
             new Label("Tipo:"), tipoCombo,
-            new Label("Nome:"), nomeField
+            new Label("Nome:"), nomeField,
+            new Label("Duração (minutos):"), duracaoSpinner,
+            new Label("Observações:"), observacoesArea
         );
         
         dialog.getDialogPane().setContent(content);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         
-        dialog.setResultConverter(buttonType -> {
-            if (buttonType == ButtonType.OK) {
-                LocalTime hora = LocalTime.of(horaSpinner.getValue(), minutoSpinner.getValue());
-                return new Evento(dataPicker.getValue(), hora, tipoCombo.getValue(), nomeField.getText());
-            }
-            return null;
+        // Atualizar visibilidade do campo nome baseado no tipo
+        tipoCombo.valueProperty().addListener((obs, oldVal, newVal) -> {
+            boolean isTreino = "Treino".equals(newVal);
+            nomeField.setPromptText(isTreino ? "Nome do treino" : "Nome do evento");
         });
         
-        Optional<Evento> resultado = dialog.showAndWait();
-        resultado.ifPresent(evento -> {
-            if (evento.data.equals(calendario.getValue())) {
-                eventos.add(evento.toString());
+        Optional<ButtonType> resultado = dialog.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            LocalDateTime dataHora = LocalDateTime.of(
+                dataPicker.getValue(),
+                LocalTime.of(horaSpinner.getValue(), minutoSpinner.getValue())
+            );
+            
+            // Criar um treino apenas se o tipo for "Treino"
+            Treino treino = null;
+            if ("Treino".equals(tipoCombo.getValue())) {
+                treino = new Treino(nomeField.getText());
             }
-        });
+            
+            // Criar e salvar o evento
+            Evento novoEvento = new Evento(
+                tipoCombo.getValue(),
+                alunoAtual.getNome(),
+                alunoAtual.getGrupo(),
+                dataHora,
+                duracaoSpinner.getValue(),
+                treino,
+                observacoesArea.getText()
+            );
+            
+            EventoRepository.salvarEvento(novoEvento);
+            atualizarEventos(calendario.getValue());
+        }
     }
     
     @FXML

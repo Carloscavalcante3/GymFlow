@@ -17,7 +17,7 @@
             
             <VBox spacing="15" style="-fx-padding: 20 0;">
                 <Button text="🏠 Início" 
-                        onAction="#navegarInicio"
+                        onAction="#navegarTreinos"
                         styleClass="sidebar-button"/>
                                
                 <Button text="💪 Meus Treinos" 
