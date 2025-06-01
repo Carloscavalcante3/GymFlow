@@ -45,7 +45,7 @@ Principais tecnologias usadas no projeto:
 - IDE compatível com java
 
 ### Passo 1: Clonar repositório
-- No terminal: git clone https://github.com/SeuUsuario/GymFlow.git
+- No terminal: git clone https://github.com/Carloscavalcante3/GymFlow/
 
 ### Passo 2: Rodar o projeto
 - Com tudo instalado execute a aplicação pela class principal Main.java
