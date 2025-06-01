@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="src.controller.ListaTreinosController"
+      spacing="10"
+      styleClass="root">
+
+    <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header">
+        <Text fx:id="saudacaoText" styleClass="welcome-text"/>
+        <Text fx:id="nomeUsuarioText" styleClass="user-name"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Text fx:id="pontosText" styleClass="points"/>
+    </HBox>
+
+    <HBox spacing="10" VBox.vgrow="ALWAYS">
+        <VBox spacing="10" styleClass="sidebar">
+            <Button text="Início" onAction="#navegarInicio" styleClass="menu-button"/>
+            <Button text="Meus Treinos" onAction="#navegarTreinos" styleClass="menu-button"/>
+            <Button text="Calendário" onAction="#navegarCalendario" styleClass="menu-button"/>
+            <Button text="Contato Instrutor" onAction="#abrirContatoInstrutor" styleClass="menu-button"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Sair" onAction="#fazerLogout" styleClass="menu-button" fx:id="btnLogout"/>
+        </VBox>
+
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button text="+ Novo Treino" onAction="#adicionarTreino" styleClass="action-button" fx:id="btnAdicionarTreino"/>
+            </HBox>
+
+            <TableView fx:id="tabelaTreinos" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colunaNome" text="Nome" prefWidth="200"/>
+                    <TableColumn fx:id="colunaExercicios" text="Exercícios" prefWidth="300"/>
+                    <TableColumn fx:id="colunaPontos" text="Pontos" prefWidth="100"/>
+                    <TableColumn fx:id="colunaStatus" text="Status" prefWidth="100"/>
+                    <TableColumn fx:id="colunaAcoes" text="Ações" prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox> 

@@ -1,19 +1,22 @@
 package src.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.fxml.FXMLLoader;
-import src.Main;
-import javafx.scene.text.Text;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import src.Main;
+import src.model.Aluno;
 import java.io.*;
-import java.util.*;
 import java.lang.reflect.Type;
+import java.nio.file.*;
+import java.util.*;
 
-public class RegisterController {
+public class RegistroController {
     @FXML
     private TextField nomeField;
     
@@ -31,9 +34,13 @@ public class RegisterController {
     
     @FXML
     public void initialize() {
-        grupoComboBox.getItems().addAll("Iniciante", "Intermediário", "Avançado");
+        grupoComboBox.getItems().addAll(
+            "Iniciante",
+            "Intermediário",
+            "Avançado"
+        );
     }
-
+    
     @FXML
     private void cadastrar() {
         String nome = nomeField.getText().trim();
@@ -48,6 +55,13 @@ public class RegisterController {
         }
         
         try {
+            // Garante que o diretório data existe
+            Path dataDir = Paths.get("data");
+            if (!Files.exists(dataDir)) {
+                Files.createDirectories(dataDir);
+            }
+            
+            // Lê o arquivo de configuração existente
             File configFile = new File("data/users.json");
             Map<String, List<Map<String, String>>> config;
             
@@ -56,42 +70,37 @@ public class RegisterController {
                 Type type = new TypeToken<Map<String, List<Map<String, String>>>>(){}.getType();
                 config = new Gson().fromJson(reader, type);
                 reader.close();
-                
-                if (config == null) {
-                    config = new HashMap<>();
-                    config.put("users", new ArrayList<>());
-                }
             } else {
                 config = new HashMap<>();
                 config.put("users", new ArrayList<>());
             }
             
-            // Verificar se o email já existe
-            boolean emailExiste = config.get("users").stream()
+            // Verifica se o e-mail já está cadastrado
+            boolean emailExists = config.get("users").stream()
                 .anyMatch(user -> user.get("email").equals(email));
             
-            if (emailExiste) {
-                mensagemErro.setText("Este email já está cadastrado.");
+            if (emailExists) {
+                mensagemErro.setText("Este e-mail já está cadastrado.");
                 mensagemErro.setVisible(true);
                 return;
             }
             
-            // Adicionar novo usuário
-            Map<String, String> novoUsuario = new HashMap<>();
-            novoUsuario.put("email", email);
-            novoUsuario.put("senha", senha);
-            novoUsuario.put("nome", nome);
-            novoUsuario.put("grupo", grupo);
+            // Adiciona o novo usuário
+            Map<String, String> newUser = new HashMap<>();
+            newUser.put("email", email);
+            newUser.put("senha", senha);
+            newUser.put("nome", nome);
+            newUser.put("grupo", grupo);
+            config.get("users").add(newUser);
             
-            config.get("users").add(novoUsuario);
-            
-            // Salvar arquivo
-            try (FileWriter writer = new FileWriter(configFile)) {
-                new Gson().toJson(config, writer);
+            // Salva o arquivo atualizado
+            try (Writer writer = new FileWriter(configFile)) {
+                new GsonBuilder().setPrettyPrinting().create().toJson(config, writer);
             }
             
-            // Navegar para tela de login
-            voltarParaLogin();
+            // Faz login com o novo usuário
+            LoginController.setUsuarioLogado(new Aluno(nome, grupo));
+            navegarParaTreinos();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,4 +124,19 @@ public class RegisterController {
             mensagemErro.setVisible(true);
         }
     }
-}
+    
+    private void navegarParaTreinos() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ListaTreinos.fxml"));
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(Main.class.getResource("/style/style.css").toExternalForm());
+            Stage stage = (Stage) nomeField.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            mensagemErro.setText("Erro ao abrir tela principal.");
+            mensagemErro.setVisible(true);
+        }
+    }
+} 

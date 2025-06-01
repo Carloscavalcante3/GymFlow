@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="src.controller.CalendarioController">
+
+    <!-- Barra Lateral Esquerda -->
+    <left>
+        <VBox styleClass="sidebar">
+            <Text text="GymFlow" styleClass="sidebar-title"/>
+            
+            <VBox spacing="15" style="-fx-padding: 20 0;">
+                <Button text="🏠 Início" 
+                        onAction="#navegarInicio"
+                        styleClass="sidebar-button"/>
+                               
+                <Button text="💪 Meus Treinos" 
+                        onAction="#navegarTreinos"
+                        styleClass="sidebar-button"/>
+                               
+                <Button text="📅 Calendário" 
+                        onAction="#navegarCalendario"
+                        styleClass="sidebar-button, active"/>
+                               
+                <Button text="📨 Instrutor" 
+                        onAction="#abrirContatoInstrutor"
+                        styleClass="sidebar-button"/>
+            </VBox>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Text fx:id="nomeUsuarioText" styleClass="sidebar-text"/>
+                <Text fx:id="pontosText" style="-fx-fill: #2ecc71;"/>
+            </HBox>
+        </VBox>
+    </left>
+
+    <!-- Conteúdo Central -->
+    <center>
+        <VBox styleClass="content-area">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Text text="Calendário de Treinos" 
+                      styleClass="section-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="+ Novo Evento" 
+                        onAction="#adicionarEvento"
+                        styleClass="button"/>
+            </HBox>
+            
+            <HBox spacing="20" VBox.vgrow="ALWAYS">
+                <!-- Calendário -->
+                <VBox spacing="10" HBox.hgrow="ALWAYS">
+                    <DatePicker fx:id="calendario" 
+                              maxWidth="Infinity"/>
+                                   
+                    <ListView fx:id="listaEventos" VBox.vgrow="ALWAYS">
+                        <placeholder>
+                            <Label text="Nenhum evento agendado" 
+                                   style="-fx-text-fill: #7f8c8d;"/>
+                        </placeholder>
+                    </ListView>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <stylesheets>
+        <URL value="@../style/style.css"/>
+    </stylesheets>
+</BorderPane> 

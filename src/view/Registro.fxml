@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -9,21 +10,21 @@
 
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="src.controller.LoginController"
+      fx:controller="src.controller.RegisterController"
       styleClass="login-container">
 
     <!-- Lado Esquerdo - Fundo Roxo -->
     <VBox alignment="CENTER" 
           styleClass="sidebar"
           prefWidth="400">
-        <Text text="Bem vindo&#10;de volta!" 
+        <Text text="Bem vindo ao&#10;GymFlow!" 
               styleClass="sidebar-title"
               textAlignment="CENTER"/>
               
         <Region VBox.vgrow="ALWAYS"/>
         
-        <Button text="Cadastre-se" 
-                onAction="#abrirTelaRegistro"
+        <Button text="Já tem uma conta? Entre aqui" 
+                onAction="#voltarParaLogin"
                 styleClass="sidebar-button"/>
     </VBox>
 
@@ -33,18 +34,25 @@
           styleClass="content-area">
         <StackPane>
             <VBox styleClass="login-form">
-                <Text text="Entre na sua conta"
+                <Text text="Crie sua conta"
                       styleClass="login-title"/>
                       
                 <VBox spacing="20">
+                    <TextField fx:id="nomeField" 
+                              promptText="Nome completo"/>
+                                     
                     <TextField fx:id="emailField" 
                               promptText="E-mail"/>
                                      
                     <PasswordField fx:id="senhaField" 
                                   promptText="Senha"/>
+                                  
+                    <ComboBox fx:id="grupoComboBox"
+                             promptText="Nível de experiência"
+                             maxWidth="Infinity"/>
                     
-                    <Button text="Entrar" 
-                            onAction="#fazerLogin"
+                    <Button text="Cadastrar" 
+                            onAction="#cadastrar"
                             styleClass="login-button"/>
                     
                     <Text fx:id="mensagemErro" 
@@ -59,4 +67,4 @@
     <stylesheets>
         <URL value="@../style/style.css"/>
     </stylesheets>
-</HBox>
+</HBox> 

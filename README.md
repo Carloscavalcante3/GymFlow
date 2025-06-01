@@ -6,7 +6,9 @@
 ![GitHub issues](https://img.shields.io/github/issues/Carloscavalcante3/Projeto_POO?style=for-the-badge)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Carloscavalcante3/Projeto_POO?style=for-the-badge)
 
-![Image](https://github.com/user-attachments/assets/1c72e429-9984-42c9-b04b-734e6fe6a0c6)
+
+![Image](https://github.com/user-attachments/assets/d5b160a9-67b0-477b-a38b-3f8022608e81)
+
 > Projeto para a disciplina de Programação Orientada a Objetos
 
 ## 💻 Tecnologias Utilizadas
@@ -32,7 +34,8 @@ Principais tecnologias usadas no projeto:
 - **Documento com as Histórias de Usuário:** https://docs.google.com/document/d/1u3GG0e-c5OxYSmTZAFWQ3sMPrNkkLIwrIP47DaMoQOg/edit?usp=sharing
 - **Protótipo (Figma):** https://www.figma.com/design/NwpaeAqG1X4QwVcFXkw4J3/GymFlow?node-id=0-1&t=4CW1bTAoMpqrbUxP-1
 - **Diagrama de classes:** https://drive.google.com/file/d/13Dh4NR5zpxFKtyXd3Lxre3L8Co2FbN6u/view?usp=sharing
-- **Screencast dos testes automatizados:** https://github.com/user-attachments/assets/6998be53-9971-44b6-8c98-8e42c2ce28af
+  ![Image](https://github.com/user-attachments/assets/c75ea360-03d6-43c5-aa85-68e7987aa2e6)
+- Screencast dos testes automatizados: 
 
 ## Como Executar o Projeto
 ### ✅ Pré requisitos:
@@ -40,7 +43,7 @@ Principais tecnologias usadas no projeto:
 - IDE compatível com java
 
 ### Passo 1: Clonar repositório
-- No terminal: git clone https://github.com/Carloscavalcante3/GymFlow/
+- No terminal: git clone https://github.com/SeuUsuario/GymFlow.git
 
 ### Passo 2: Rodar o projeto
 - Com tudo instalado execute a aplicação pela class principal Main.java

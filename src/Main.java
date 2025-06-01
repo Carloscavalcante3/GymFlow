@@ -6,13 +6,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        primaryStage = stage;
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/Login.fxml"));
+        Scene scene = new Scene(loader.load());
         scene.getStylesheets().add(Main.class.getResource("/style/style.css").toExternalForm());
-        stage.setTitle("GymFlow");
         stage.setScene(scene);
+        stage.setTitle("GymFlow");
+        stage.setFullScreen(true);
         stage.show();
     }
 
