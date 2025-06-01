@@ -33,11 +33,9 @@ Principais tecnologias usadas no projeto:
 
 - **Histórias implementadas:** Foram adicionadas as histórias 5, 6 e 7 nessa versão(https://docs.google.com/document/d/1u3GG0e-c5OxYSmTZAFWQ3sMPrNkkLIwrIP47DaMoQOg/edit?usp=sharing)
 - **Protótipo (Figma):** https://www.figma.com/design/NwpaeAqG1X4QwVcFXkw4J3/GymFlow?node-id=0-1&t=4CW1bTAoMpqrbUxP-1
-- **Diagrama de classes:** https://drive.google.com/file/d/13Dh4NR5zpxFKtyXd3Lxre3L8Co2FbN6u/view?usp=sharing
-- **Screencast do sistema:** https://github.com/user-attachments/assets/5cd00df7-70ab-48b3-887f-e502cef90c4c
+- **Diagrama de classes:** ![Image](https://github.com/user-attachments/assets/a01fa7d8-ba8b-4909-96f7-3324131875c5)
+- **Screencast do sistema:** https://github.com/user-attachments/assets/52a6bcd1-3a61-4821-ac85-87499c0141fa
 - **Screencast dos testes automatizados:** https://github.com/user-attachments/assets/40ae99e6-0c4f-408d-bf36-f6a582e78a52
-
-
 
 ## Como Executar o Projeto
 ### ✅ Pré requisitos:
