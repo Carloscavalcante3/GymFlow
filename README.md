@@ -46,6 +46,9 @@ Principais tecnologias usadas no projeto:
 
 ### Passo 1: Clonar repositório
 - Abra a IDE de sua preferência (Se possível Eclipe ou InteliJ IDEA)
+- Ajuste as configurações do JDK e configurações de run
+- Se estiver no InteliJ:
+   - Abra Run > Edit Configurations > + > Application > Em VM option adicione o seguinte código (ajustando com o caminho necessário): --module-path "C:\caminho\para\seu\javafx-sdk-21.0.7\lib" --add-modules javafx.controls,javafx.fxml
 - No terminal digite: git clone https://github.com/Carloscavalcante3/GymFlow/
 - Aguarde o projeto ser clonado
 
